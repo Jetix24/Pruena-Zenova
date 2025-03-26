@@ -56,18 +56,52 @@ switch ($method) {
         $data = json_decode(file_get_contents('php://input'), true);
         $id = $data['id'];
         $name = $data['name'];
+        $description = $data['description'];
         $price = $data['price'];
-        $sql = "UPDATE products SET name='$name', price=$price WHERE id=$id";
+        $category = $data['category'];
+        $image = $data['image'];
+        $score = $data['score'];
+        $stock = $data['stock'];
+        $onOffer = $data['onOffer'];
+        $discount = $data['discount'];
+
+        $sql = "UPDATE products 
+                SET name='$name', 
+                    description='$description', 
+                    price=$price, 
+                    category='$category', 
+                    image='$image', 
+                    score=$score, 
+                    stock=$stock, 
+                    onOffer=$onOffer, 
+                    discount=$discount 
+                WHERE id=$id";
+
         $result = mysqli_query($db_conn, $sql);
-        echo json_encode($result);
-        break;
+
+        if ($result) {
+            http_response_code(200); // Código 200: Actualización exitosa
+            echo json_encode(["message" => "Product updated successfully"]);
+            return;
+        } else {
+            http_response_code(500); // Código 500: Error interno del servidor
+            echo json_encode(["message" => "Failed to update product"]);
+            return;
+        }
     case 'DELETE':
-        $data = json_decode(file_get_contents('php://input'), true);
         $id = $data['id'];
         $sql = "DELETE FROM products WHERE id=$id";
         $result = mysqli_query($db_conn, $sql);
-        echo json_encode($result);
-        break;
+
+        if ($result && mysqli_affected_rows($db_conn) > 0) {
+            http_response_code(200); // Código 200: Eliminación exitosa
+            echo json_encode(["message" => "Product deleted successfully"]);
+            return;
+        } else {
+            http_response_code(404); // Código 404: Producto no encontrado
+            echo json_encode(["message" => "Product not found or already deleted"]);
+            return; // Missing semicolon fixed here
+        }
     default:
         echo "Method not allowed";
         break;
