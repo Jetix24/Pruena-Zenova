@@ -1,34 +1,39 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Biblioteca para realizar solicitudes HTTP
+import { useNavigate } from "react-router-dom"; // Hook para redirigir a otras rutas
 
 export default function AddProducts() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook para redirigir al usuario después de enviar el formulario
   const [formvalue, setFormValue] = useState({
-    name: "",
-    description: "",
-    price: "",
-    category: "",
-    image: "",
-    score: "",
-    stock: "",
-    onOffer: false, // Inicialmente es falso
-    discount: "",
+    name: "", // Nombre del producto
+    description: "", // Descripción del producto
+    price: "", // Precio del producto
+    category: "", // Categoría del producto
+    image: "", // URL de la imagen del producto
+    score: "", // Calificación del producto
+    stock: "", // Cantidad en stock
+    onOffer: false, // Indica si el producto está en oferta
+    discount: "", // Porcentaje de descuento si está en oferta
   });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(""); // Mensaje de éxito o error después de enviar el formulario
 
+  // Maneja los cambios en los campos de entrada del formulario
   const handleInput = (e) => {
-    setFormValue({ ...formvalue, [e.target.id]: e.target.value }); // Actualiza el estado según el input
+    setFormValue({ ...formvalue, [e.target.id]: e.target.value }); // Actualiza el estado según el campo modificado
   };
 
+  // Maneja los cambios en el checkbox de "onOffer"
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
     setFormValue({ ...formvalue, [id]: checked }); // Actualiza el estado con el valor booleano del checkbox
   };
 
+  // Maneja el envío del formulario
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formvalue);
+    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+    console.log(formvalue); // Muestra los datos del formulario en la consola para depuración
+
+    // Prepara los datos para enviarlos al servidor
     const formData = {
       name: formvalue.name,
       description: formvalue.description,
@@ -42,14 +47,15 @@ export default function AddProducts() {
     };
 
     try {
+      // Realiza una solicitud POST al servidor para agregar un producto
       const res = await axios.post(
         "http://localhost:8081/apiRest/products.php",
         formData
       );
-      console.log("Respuesta del servidor:", res.data); // Muestra la respuesta del servidor
-      setMessage(res.data.success); // Muestra el mensaje de éxito
+      console.log("Respuesta del servidor:", res.data); // Muestra la respuesta del servidor en la consola
+      setMessage(res.data.success); // Muestra el mensaje de éxito en la interfaz
       setTimeout(() => {
-        navigate("/products");
+        navigate("/products"); // Redirige a la lista de productos después de 2 segundos
       }, 2000);
     } catch (error) {
       console.error("Error al enviar los datos:", error); // Muestra el error en la consola
@@ -62,8 +68,10 @@ export default function AddProducts() {
         <div className="row">
           <div className="col-md-6">
             <h1>Crear productos</h1>
-            <p className="text-success">{message}</p>
+            <p className="text-success">{message}</p>{" "}
+            {/* Muestra el mensaje de éxito */}
             <form onSubmit={handleSubmit}>
+              {/* Campo para el nombre del producto */}
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Nombre
@@ -76,6 +84,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Campo para la descripción del producto */}
               <div className="mb-3">
                 <label htmlFor="description" className="form-label">
                   Descripción
@@ -88,6 +98,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Campo para el precio del producto */}
               <div className="mb-3">
                 <label htmlFor="number" className="form-label">
                   Precio
@@ -100,6 +112,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Campo para seleccionar la categoría del producto */}
               <div className="mb-3">
                 <label htmlFor="category" className="form-label">
                   Categoria
@@ -116,6 +130,8 @@ export default function AddProducts() {
                   <option value="3">Juguetes</option>
                 </select>
               </div>
+
+              {/* Campo para la URL de la imagen del producto */}
               <div className="mb-3">
                 <label htmlFor="image" className="form-label">
                   Imagen
@@ -128,6 +144,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Campo para la calificación del producto */}
               <div className="mb-3">
                 <label htmlFor="score" className="form-label">
                   Calificación
@@ -140,6 +158,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Campo para el stock del producto */}
               <div className="mb-3">
                 <label htmlFor="stock" className="form-label">
                   Stock
@@ -152,6 +172,8 @@ export default function AddProducts() {
                   onChange={handleInput}
                 />
               </div>
+
+              {/* Checkbox para indicar si el producto está en oferta */}
               <div className="mb-3 form-check">
                 <input
                   type="checkbox"
@@ -164,7 +186,9 @@ export default function AddProducts() {
                   ¿Tiene una oferta el producto?
                 </label>
               </div>
-              {formvalue.onOffer && ( // Muestra el campo de descuento solo si el checkbox está marcado
+
+              {/* Campo para el descuento si el producto está en oferta */}
+              {formvalue.onOffer && (
                 <div className="mb-3">
                   <label htmlFor="discount" className="form-label">
                     Descuento
@@ -179,6 +203,8 @@ export default function AddProducts() {
                   />
                 </div>
               )}
+
+              {/* Botón para enviar el formulario */}
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
