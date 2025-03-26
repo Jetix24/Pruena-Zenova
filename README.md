@@ -51,3 +51,53 @@ Sigue estos pasos para instalar y ejecutar la aplicación:
      npm start
      ```
    - Abre [http://localhost:3000](http://localhost:3000) en tu navegador para interactuar con la aplicación.
+
+---
+
+## Funcionalidades que se podrían implementar
+
+A continuación, se describen algunas funcionalidades adicionales que podrían mejorar la aplicación:
+
+### 1. Gestión de categorías
+
+- **Descripción**: Implementar un sistema para gestionar categorías desde el frontend.
+- **Detalles**:
+  - Crear una interfaz para agregar, editar y eliminar categorías.
+  - Mostrar una lista de categorías disponibles en una página dedicada.
+  - Relacionar las categorías con los productos para que cada producto pertenezca a una categoría específica.
+
+### 2. Relación entre productos y categorías
+
+- **Descripción**: Establecer una relación entre los productos y las categorías.
+- **Detalles**:
+  - Al agregar o editar un producto, permitir seleccionar una categoría de una lista desplegable.
+  - Mostrar la categoría asociada a cada producto en la tabla de productos.
+  - Filtrar productos por categoría en la lista de productos.
+
+### 3. Edición de productos desde el frontend
+
+- **Descripción**: Implementar la funcionalidad para editar productos directamente desde el frontend.
+- **Detalles**:
+  - Agregar un botón "Editar" en la tabla de productos.
+  - Al hacer clic en "Editar", redirigir al usuario a un formulario prellenado con los datos del producto seleccionado.
+  - Permitir actualizar los datos del producto y enviarlos al servidor mediante una solicitud `PUT`.
+
+### 4. Eliminación de productos desde el frontend
+
+- **Descripción**: Implementar la funcionalidad para eliminar productos desde el frontend.
+- **Detalles**:
+  - Agregar un botón "Eliminar" en la tabla de productos.
+  - Al hacer clic en "Eliminar", mostrar una confirmación antes de proceder.
+  - Enviar una solicitud `DELETE` al servidor para eliminar el producto seleccionado.
+  - Actualizar la lista de productos en el frontend después de la eliminación.
+
+### 5. Búsqueda y filtrado de productos
+
+- **Descripción**: Mejorar la experiencia del usuario al buscar productos.
+- **Detalles**:
+  - Implementar un campo de búsqueda en la barra de navegación para buscar productos por nombre o descripción.
+  - Agregar filtros avanzados para buscar productos por categoría, precio, calificación, etc.
+
+---
+
+Estas funcionalidades no solo mejorarían la experiencia del usuario, sino que también harían que la aplicación sea más completa y robusta. ¡Son excelentes puntos de partida para futuras iteraciones del proyecto!
