@@ -7,7 +7,7 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg bg-info">
         <div className="container-fluid">
           <NavLink to="/" className="navbar-brand">
-            Navbar
+            Zenova
           </NavLink>
           <button
             className="navbar-toggler"
