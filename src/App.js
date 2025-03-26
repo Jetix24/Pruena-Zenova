@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./component/Header";
 import Home from "./component/Home";
 import ProductsList from "./component/ProductsList";
+import AddProducts from "./component/AddProducts";
 import CategoriesList from "./component/CategoriesList";
-import Footer from "./component/Footer";
+// import Footer from "./component/Footer";
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsList />} />
+        <Route path="/addProducts" element={<AddProducts />} />
         <Route path="/categories" element={<CategoriesList />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
